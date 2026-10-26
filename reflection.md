@@ -41,26 +41,37 @@ The conflict detection algorithm checks for exact string matches on the `time` a
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+We tested four core behaviors:
+1. **Task Completion**: Verified that calling `mark_complete()` successfully changes a task's completion status.
+2. **Task Addition**: Verified that adding a task correctly increments a pet's task count.
+3. **Chronological Sorting**: Verified that tasks are returned in correct chronological order regardless of insertion order.
+4. **Conflict Detection**: Verified that the scheduler correctly flags tasks scheduled at duplicate times.
+======================== test session starts ========================
+platform darwin -- Python 3.13.15, pytest-9.1.1, pluggy-1.7.0
+rootdir: /Users/suhanapatodi/Documents/GitHub/ai110-module2show-pawpal-starter
+plugins: anyio-4.15.1
+collected 4 items                                                   
+
+test_pawpal.py ....                                           [100%]
+
+========================= 4 passed in 0.03s =========================
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+We have 5/5 stars confidence in the system's reliability because all automated unit tests pass cleanly with green checkmarks, and the CLI/Streamlit workflows have been manually verified. If we had more time, we would test edge cases such as invalid time format strings (e.g., "25:61") and overlapping task duration intervals.
 
 ---
 
 ## 5. Reflection
 
-**a. What went well**
+a. What went well
 
-- What part of this project are you most satisfied with?
+We are most satisfied with the clean object-oriented encapsulation and how seamlessly the backend logic layer integrated with Streamlit's st.session_state to provide persistent state management across page reloads.
 
-**b. What you would improve**
+b. What you would improve
 
-- If you had another iteration, what would you improve or redesign?
+If we had another iteration, we would implement robust data persistence (e.g., saving pets and tasks to a data.json file) and upgrade conflict detection to support overlapping time intervals and task durations.
 
-**c. Key takeaway**
+c. Key takeaway
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+The most important takeaway is that AI is an incredible accelerator for scaffolding and syntax generation, but rigorous human architectural oversight as the "lead architect" is mandatory to ensure correct class relationships, data encapsulation, and boundary handling.
