@@ -46,13 +46,22 @@ pip install -r requirements.txt
 
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
-```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
-```
+=== PawPal+ CLI Demo ===
+
+--- Sorted Schedule (Chronological) ---
+ Max - Morning Walk (daily) | Status: ⏳ Pending
+ Max - Breakfast Feeding (daily) | Status: ⏳ Pending
+ Luna - Veterinarian Checkup (once) | Status: ⏳ Pending
+ Max - Evening Medication (daily) | Status: ⏳ Pending
+
+--- Conflict Detection Check ---
+⚠️ Conflict Warning: Task 'Breakfast Feeding' (Max) is scheduled at 07:30, which conflicts with 'Morning Walk' (Max).
+
+--- Filtered View: Pending Tasks Only ---
+ Max: Morning Walk
+ Max: Breakfast Feeding
+ Luna: Veterinarian Checkup
+ Max: Evening Medication
 
 ## 🧪 Testing PawPal+
 
@@ -68,7 +77,16 @@ Sample test output:
 
 ```
 # Paste your pytest output here
-```
+`(.venv) suhanapatodi@Mac ai110-module2show-pawpal-starter % python -m pytest test_pawpal.py
+======================== test session starts ========================
+platform darwin -- Python 3.13.15, pytest-9.1.1, pluggy-1.7.0
+rootdir: /Users/suhanapatodi/Documents/GitHub/ai110-module2show-pawpal-starter
+plugins: anyio-4.15.1
+collected 4 items                                                   
+
+test_pawpal.py ....                                           [100%]
+
+========================= 4 passed in 0.03s =========================``
 
 ## 📐 Smarter Scheduling
 
@@ -76,19 +94,23 @@ Sample test output:
 
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Task sorting | Schedule.sort_by_time()| Organizes all household tasks chronologically by "HH:MM" timestamps using a lambda sorting key.|
+| Filtering | Scheduler.filter_tasks()| Filters tasks by completion status (completed=True/False) and/or specific pet name. |
+| Conflict handling | Scheduler.detect_conflicts()| Uses a dictionary hash map to identify and flag tasks scheduled at the exact same timestamp. |
+| Recurring tasks | Scheduler.complete_task_with_recurrence()| Automatically provisions a new task instance for the next occurrence when daily or weekly tasks are completed.|
 
 ## 📸 Demo Walkthrough
 
 Describe your app in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+Launch the Web App: Run streamlit run app.py in your terminal to open the interactive user interface in your browser.
+
+Register a Pet: Navigate to the "Add Pet" page via the sidebar, enter your pet's name and species (e.g., Max the Dog), and submit the form.
+
+Schedule Care Tasks: Go to the "Add Task" page, select your pet, provide a task description (e.g., Morning Walk), specify a time in "HH:MM" format, and choose a frequency (once, daily, weekly).
+
+View Today's Schedule & Conflicts: Return to the "Dashboard & Schedule" view to see all household tasks sorted chronologically. If any tasks share identical timestamps, warning banners will immediately alert you.
+
+Manage & Complete Tasks: Go to "Manage Tasks" to mark items as complete, which updates their status and automatically triggers recurring task generation.
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
